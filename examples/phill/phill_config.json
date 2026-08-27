@@ -1,0 +1,97 @@
+{
+  "name": "phill",
+  "description": "Flow over periodic hills, geometry parameter alpha=1.0, invRe = 1/5600",
+  "physics": {
+    "invRe": 0.0001785714285714286
+  },
+  "network": {
+    "layers": [
+      2,
+      64,
+      64,
+      64,
+      64,
+      64,
+      64,
+      64,
+      64,
+      9
+    ],
+    "learning_rate": 0.001
+  },
+  "precision": "float32",
+  "backend": "tensorflow",
+  "coordinate_scaling": {
+    "enabled": false
+  },
+  "loss": {
+    "supervise_pressure": false
+  },
+  "constraints": {
+    "if_positivity": [
+      true,
+      "softplus"
+    ],
+    "if_realisability": false
+  },
+  "training_defaults": {
+    "n_iters_adam": 2000,
+    "n_lbfgs": 100,
+    "batch_data": "full",
+    "batch_pi_divisor": 50,
+    "print_interval": 100,
+    "lbfgs_options": {
+      "maxcor": 100,
+      "ftol": "eps",
+      "maxiter": 200,
+      "maxls": 50,
+      "tf32": false
+    },
+    "lbfgs_batch_mode": "batch",
+    "lbfgs_batch_data": "full",
+    "lbfgs_batch_pi_divisor": 5
+  },
+  "data": {
+    "domain_data": "domain_data.npy",
+    "domain_in": "domain_in.npy",
+    "bc_data": "bc_data.npy",
+    "bc_in": "bc_in.npy",
+    "fields": [
+      "u",
+      "v",
+      "p",
+      "uu",
+      "uv",
+      "vv"
+    ],
+    "extras": {}
+  },
+  "plotting": {
+    "x_source": "x",
+    "axis_limits": {
+      "x": [
+        1.0,
+        5.0
+      ],
+      "y": [
+        0.0,
+        3.0
+      ]
+    },
+    "xticks": [
+      2,
+      4
+    ],
+    "yticks": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tick_stride": 10
+  },
+  "postprocess_module": "postprocess.py",
+  "custom": {
+    "hill_alpha": 1.0
+  }
+}

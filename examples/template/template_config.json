@@ -1,0 +1,71 @@
+{
+  "name": "template",
+  "description": "REQUIRED: one-line description of the flow",
+  "physics": {
+    "invRe": "REQUIRED"
+  },
+  "network": {
+    "layers": [
+      2,
+      64,
+      64,
+      64,
+      64,
+      64,
+      64,
+      64,
+      64,
+      9
+    ],
+    "learning_rate": 0.001
+  },
+  "precision": "float32",
+  "backend": "tensorflow",
+  "coordinate_scaling": {
+    "enabled": false
+  },
+  "loss": {
+    "supervise_pressure": false
+  },
+  "constraints": {
+    "if_positivity": [
+      true,
+      "softplus"
+    ],
+    "if_realisability": false
+  },
+  "training_defaults": {
+    "n_iters_adam": 2000,
+    "n_lbfgs": 50,
+    "batch_data": "full",
+    "batch_pi_divisor": 100,
+    "print_interval": 100,
+    "lbfgs_options": {
+      "maxcor": 100,
+      "ftol": 0,
+      "maxiter": 200,
+      "maxls": 50
+    },
+    "lbfgs_batch_mode": "batch",
+    "lbfgs_batch_data": "full",
+    "lbfgs_batch_pi_divisor": 100
+  },
+  "data": {
+    "domain_data": "domain_data.npy",
+    "domain_in": "domain_in.npy",
+    "bc_data": "bc_data.npy",
+    "bc_in": "bc_in.npy",
+    "fields": [
+      "u",
+      "v",
+      "p",
+      "uu",
+      "uv",
+      "vv"
+    ],
+    "extras": {}
+  },
+  "plotting": {
+    "x_source": "x"
+  }
+}

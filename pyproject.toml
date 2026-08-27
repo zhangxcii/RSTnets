@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rstnets"
+dynamic = ["version"]
+description = "Physics-informed neural networks (RSTnets) for RANS + Reynolds-stress-transport reconstruction from boundary data"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [{name = "Jincheng Zhang", email = "jc.zhang15@gmail.com"}]
+requires-python = ">=3.10"
+urls = {Repository = "https://github.com/zhangxcii/RSTnets"}
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = [
+  "numpy",
+  "scipy",
+  "matplotlib",
+  "tensorflow==2.21.0",
+  "tensorflow-probability==0.25.0",
+  "tf-keras==2.21.0",
+  "deepxde==1.15.0",
+]
+
+[project.optional-dependencies]
+gpu = ["tensorflow[and-cuda]==2.21.0"]
+torch = ["torch"]
+dev = ["pytest", "build", "twine"]
+
+[tool.setuptools.packages.find]
+include = ["rstnets*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "rstnets._version.__version__"}
